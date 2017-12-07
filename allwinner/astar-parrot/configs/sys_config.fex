@@ -234,7 +234,7 @@ bb_wake_ap	= port:PL02<4><default><default><0>
 ; twi_used = twix enable
 ;----------------------------------------------------------------------------------
 [twi0]
-twi_used        = 1
+twi_used        = 0
 twi_scl         = port:PH02<2><default><default><default>
 twi_sda         = port:PH03<2><default><default><default>
 
@@ -678,25 +678,26 @@ vip_csi_d5               = port:PE09<2><default><default><default>
 vip_csi_d6               = port:PE10<2><default><default><default>
 vip_csi_d7               = port:PE11<2><default><default><default>
 
-vip_csi_sck              = port:PE12<2><default><default><default>
-vip_csi_sda              = port:PE13<2><default><default><default>
+;vip_csi_sck              = port:PE12<2><default><default><default>
+;vip_csi_sda              = port:PE13<2><default><default><default>
 
  
-vip_dev0_mname           = "gc0308"
+;vip_dev0_mname           = "gc0308"
+vip_dev0_mname           = "ov7725"
 vip_dev0_pos             = "rear"
 vip_dev0_lane            = 1
 vip_dev0_twi_id          = 2
 vip_dev0_twi_addr        = 0x42
 vip_dev0_isp_used        = 0
 vip_dev0_fmt             = 0
-vip_dev0_stby_mode       = 1
+vip_dev0_stby_mode       = 0
 vip_dev0_vflip           = 0
 vip_dev0_hflip           = 0
 vip_dev0_iovdd           = "axp22_dldo3"
-vip_dev0_iovdd_vol       = 2800000
-vip_dev0_avdd            = ""
-vip_dev0_avdd_vol        = 2800000
-vip_dev0_dvdd            = ""
+vip_dev0_iovdd_vol       = 3300000
+vip_dev0_avdd            = "axp22_ldoio0"
+vip_dev0_avdd_vol        = 3300000
+vip_dev0_dvdd            = "axp22_eldo2"
 vip_dev0_dvdd_vol        = 1800000
 vip_dev0_afvdd           = ""
 vip_dev0_afvdd_vol       = 2800000
@@ -713,13 +714,17 @@ vip_dev0_af_pwdn         =
 ;--------------------------------------------------------------------------------
 ;leds
 ;--------------------------------------------------------------------------------
+[uboot_led]
+led_used                 = 1
+led_gpio                 = port:PH02<1><default><default><default>
 [led_para]
 led_used                = 1
-led_num                 = 2
-led1                    = port:PE17<1><default><default><default>
+led_num                 = 1
+led1                    = port:PH02<1><default><default><1>
 led1_trigger           = "none"
-led2                    = port:PE16<1><default><default><default>
-led2_trigger           = "none"
+led1_active_low         = 0	
+;led2                    = port:PE16<1><default><default><default>
+;led2_trigger           = "none"
 ;led3                    = port:PH01<1><default><default><default>
 
 ;-------------------------------------------------------------------------------
@@ -749,7 +754,7 @@ led2_trigger           = "none"
 ;     that supports SD3.0 cards and eMMC4.4+ flashes
 ;-------------------------------------------------------------------------------
 [mmc0_para]
-sdc_used          = 1
+sdc_used          = 0
 sdc_detmode       = 1
 sdc_buswidth      = 4
 sdc_d1            = port:PF00<2><1><2><default>
@@ -818,9 +823,9 @@ sdc_regulator     = "none"
 ;----------------------------------------------------------------------------------
 [usbc0]
 usb_used            = 1
-usb_port_type       = 2
-usb_detect_type     = 1
-usb_id_gpio         = port:PD10<0><1><default><default>
+usb_port_type       = 0
+usb_detect_type     = 0
+；usb_id_gpio         = port:PD10<0><1><default><default>
 usb_det_vbus_gpio   = "axp_ctrl"
 usb_drv_vbus_gpio   = port:power4<1><0><default><0>
 usb_restrict_gpio   = 
@@ -881,7 +886,9 @@ gsensor_int2        =
 ;--------------------------------------------------------------------------------
 [gsensor_list_para]
 gsensor_det_used          = 1
-bma250                    = 1
+bma250                    = 0
+bma2x2                    = 1
+bmg160                    = 1
 stk831x                   = 0
 mma8452                   = 1
 mma7660                   = 1
@@ -1099,8 +1106,8 @@ frame_width         = 1
 tx_data_mode 		= 1
 rx_data_mode 		= 1
 i2s0_mclk            =
-i2s0_bclk            = port:PB05<2><1><default><default>
-i2s0_lrclk           = port:PB04<2><1><default><default>
+i2s0_bclk            = port:PB04<2><1><default><default>
+i2s0_lrclk           = port:PB05<2><1><default><default>
 i2s0_dout0           = port:PB06<2><1><default><default>
 i2s0_dout1           =
 i2s0_dout2           =
@@ -1167,41 +1174,33 @@ i2s1_din             = port:PG13<2><1><default><default>
 [audio0]
 audio_used          	= 1
 audio_hp_ldo       		= "none"
-headphone_vol			= 0x3b
-earpiece_vol 			= 0x3e
+headphone_vol			= 0x2d
+earpiece_vol 			= 0x2d
 cap_vol					= 0x5
-pa_single_vol			= 0x3a
+pa_single_vol			= 0x2d
 pa_double_used			= 1
-pa_double_vol			= 0x3e
+pa_double_vol			= 0x2d
 headphone_direct_used	= 1
 headset_mic_vol 		= 3
 main_mic_vol        	= 1
+mic1_used				= 1
+mic2_used				= 0
+linein_to_spk_used     	= 1
+linein_to_hp_used 		= 0
+linein_to_aif2_used     = 0
 audio_lowlevel_detect	= 1
-;audio_linein_detect    	= port:PB07<0><default><default><0>
-audio_pa_ctrl          	= port:PD11<1><default><default><0>
+sysaudio_to_aif2_used	= 0
+audio_linein_ctrl      	= port:PB07<0><default><default><0>
+audio_pa_ctrl          	= port:PH09<1><default><default><0>
 aif2_used              	= 0
 aif3_used              	= 0
 headphone_mute_used 	= 0
-pa_gpio_reverse 	= 0
+DAC_VOL_CTRL_SPK        = 0xa0a0
+DAC_VOL_CTRL_HEADPHONE 	= 0xa0a0
 agc_used				= 1
 drc_used				= 0
-aif1_lrlk_div  = 0x40
 
-[codec_aif2]
-aif2_lrlk_div = 0x20
-aif2master = 1
-aif2fmt = 0
-aif2_bclk            = port:PB05<3><1><default><default>
-aif2_lrclk           = port:PB04<3><1><default><default>
-aif2_dout            = port:PB06<3><1><default><default>
-aif2_din             = port:PB07<3><1><default><default>
 
-[codec_aif3]
-aif3fmt = 4
-aif3_bclk            = port:PG11<3><1><default><default>
-aif3_lrclk           = port:PG10<3><1><default><default>
-aif3_dout            = port:PG12<3><1><default><default>
-aif3_din             = port:PG13<3><1><default><default>
 
 ;-------------------------------------------------------------------------------------
 ;pmu_used                    ---0:not used,1:used
@@ -1384,7 +1383,7 @@ pmu_reset                  = 0
 pmu_IRQ_wakeup             = 1
 pmu_hot_shutdowm           = 1
 pmu_inshort                = 0
-power_start                = 0
+power_start                = 3
 
 pmu_temp_enable            = 0
 pmu_charge_ltf             = 2261
