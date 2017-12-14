@@ -352,7 +352,7 @@ mode          = 0
 ;ctp_wakeup : port for wakeup tp
 ;----------------------------------------------------------------------------------
 [ctp_para]
-ctp_used            = 1
+ctp_used            = 0
 ctp_name            = "gt82x"
 ctp_twi_id          = 0
 ctp_twi_addr        = 0x5d
@@ -374,7 +374,7 @@ ctp_power_io        =
 ;Module name postposition 1 said detection, 0 means no detection. 
 ;--------------------------------------------------------------------------------
 [ctp_list_para]
-ctp_det_used              = 1
+ctp_det_used              = 0
 ft5x_ts                   = 1
 gt82x                     = 1
 gslX680                   = 1
@@ -771,7 +771,7 @@ sdc_isio          = 0
 sdc_regulator     = "none"
 
 [mmc1_para]
-sdc_used          = 1
+sdc_used          = 0
 sdc_detmode       = 4
 sdc_buswidth      = 4
 sdc_clk           = port:PG00<2><1><1><default>
@@ -787,7 +787,7 @@ sdc_isio          = 1
 sdc_regulator     = "none"
 
 [mmc2_para]
-sdc_used          = 0
+sdc_used          = 1
 sdc_detmode       = 3
 sdc_buswidth      = 8
 sdc_2xmode	  = 1
