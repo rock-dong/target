@@ -1267,6 +1267,7 @@ CONFIG_PACKAGE_libminui=y
 CONFIG_PACKAGE_libspeex-lite=y
 CONFIG_PACKAGE_libsysutils=y
 CONFIG_PACKAGE_libutils=y
+CONFIG_PACKAGE_mincomtest=y
 CONFIG_PACKAGE_misc-upgrade=y
 CONFIG_PACKAGE_mtop=y
 CONFIG_PACKAGE_nativepower=y
